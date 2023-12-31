@@ -15,9 +15,8 @@ export class ProductViewComponent implements OnInit{
   // any time the categoryId input changes, we want to update our breadcrumbs array
   // we are using a setter to handle new values
   @Input() set categoryId(val: string) {
-    this.productsService.setSelectedCategory(val);
-    // TODO: comment out productsService and uncomment the line below
-    // this.productsSignals.selectedCategory.set(val);
+  
+  this.productsSignals.selectedCategory.set(val);
 
     this.breadcrumbs = this.breadcrumbs.slice(0,1);
     this.breadcrumbs.push(
@@ -28,9 +27,7 @@ export class ProductViewComponent implements OnInit{
     )
   }
 
-  private readonly productsService = inject(ProductService);
-  // TODO: signals service comment out productService and uncomment the next line
-  // private readonly productsSignals = inject(ProductSignalsService)
+  private readonly productsSignals = inject(ProductSignalsService)
 
   // The activated route is only available when the component is the destination of the current route
   private readonly activatedRoute = inject(ActivatedRoute);

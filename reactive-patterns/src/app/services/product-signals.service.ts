@@ -1,4 +1,4 @@
-import { Injectable, computed, inject, signal } from '@angular/core';
+import { Injectable, WritableSignal, computed, inject, signal } from '@angular/core';
 import { delay, map, of, tap } from 'rxjs';
 import { Product } from '../models/product';
 import { PRODUCTS } from '../models/product-data.mock';
@@ -16,7 +16,6 @@ export class ProductSignalsService {
   readonly selectedProductId = toSignal(this.activatedRoute.queryParams.pipe(
     map((queryParams) => queryParams['productId']))
   );
-
 
   readonly selectedCategory = signal<string>(Category.ALL);
 
@@ -40,6 +39,6 @@ export class ProductSignalsService {
 
   readonly homeProducts = computed(() => {
     const middle = Math.floor(this.products().length / 2);
-    return [this.products()[0], this.products()[middle], this.products()[this.products().length -1]];
+    return [this.products()[0], this.products()[middle], this.products().at(-1)];
   });
 }
