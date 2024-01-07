@@ -16,7 +16,6 @@ import { BreadcrumbsComponent } from '../shared-ui/breadcrumbs/breadcrumbs.compo
     MatProgressSpinnerModule,
     MatButtonModule,
     BreadcrumbsComponent,
-    NgIf,
     FormsModule,
   ],
   selector: 'app-contact',
