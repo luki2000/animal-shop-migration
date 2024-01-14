@@ -34,12 +34,13 @@
                 [matMenuTriggerFor]="menu"
               >Products <span>&#8964;</span></button>
               <mat-menu class="menu-dropdown" #menu="matMenu">
-                <button
-                  *ngFor="let link of LINKS"
-                  mat-menu-item
-                  [routerLink]="['/' + ROUTE_TOKENS.products, link.category]"
-                  routerLinkActive="router-link-active"
-                >{{ link.description }}</button>
+                @for(link of LINKS; track link.category) {
+                  <button
+                    mat-menu-item
+                    [routerLink]="['/' + ROUTE_TOKENS.products, link.category]"
+                    routerLinkActive="router-link-active"
+                  >{{ link.description }}</button>
+                }
               </mat-menu>
             </li>
             <li>
@@ -55,17 +56,14 @@
     </mat-toolbar-row>
   </mat-toolbar>
 </header>
-<ng-container *ngIf="selectedProduct$ | async as selectedProduct">
-<!-- TODO: Signals Template -->
-<!-- <ng-container *ngIf="selectedProduct() as selectedProduct"> -->
-  <div
-  *ngIf="selectedProduct.onSale"
-    class="sale-banner"
-  >
-    <span>{{ selectedProduct.title }}</span>
-    <span>{{ '  On Sale Now!!!' | uppercase }}</span>
-  </div>
-</ng-container>
+@if(selectedProduct(); as selectedProduct) {
+  @if(selectedProduct.onSale) {
+    <div class="sale-banner">
+      <span>{{ selectedProduct.title }}</span>
+      <span>{{ '  On Sale Now!!!' | uppercase }}</span>
+    </div>
+  }
+}
 
 <mat-sidenav-container>
 <!-- responsive side menu that is only displayed on screens 695px wide and smaller -->
@@ -73,12 +71,13 @@
     <mat-nav-list>
       <button (click)="sidenav.toggle()" mat-menu-item>Close</button>
       <button mat-menu-item (click)="sidenav.toggle()">Contact</button>
-      <button
-        *ngFor="let link of LINKS"
-        mat-menu-item
-        [routerLink]="['/' + ROUTE_TOKENS.products, link.category]"
-        routerLinkActive="router-link-active"
-      >{{ link.description }}</button>
+      @for(link of LINKS; track link.category) {
+        <button
+          mat-menu-item
+          [routerLink]="['/' + ROUTE_TOKENS.products, link.category]"
+          routerLinkActive="router-link-active"
+        >{{ link.description }}</button>
+      }
     </mat-nav-list>
   </mat-sidenav>
 

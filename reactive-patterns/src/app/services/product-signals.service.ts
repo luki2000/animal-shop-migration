@@ -3,7 +3,7 @@ import { delay, map, of, tap } from 'rxjs';
 import { Product } from '../models/product';
 import { PRODUCTS } from '../models/product-data.mock';
 import { Category } from '../models/category';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
@@ -33,6 +33,9 @@ export class ProductSignalsService {
   });
 
   readonly selectedProduct = computed(() => {
+    if(!this.selectedProductId()) {
+      return void 0;
+    }
     // comparing lowercase values so the query params do not have to be case sensitive
     return this.products().find((product) => product.id.toLowerCase() === this.selectedProductId().toLowerCase())
   });
