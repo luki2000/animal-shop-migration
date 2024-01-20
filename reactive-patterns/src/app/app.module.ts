@@ -59,7 +59,7 @@ const ROUTES: Route[] = [
     MatSidenavModule,
     MatListModule,
     RouterModule.forRoot(ROUTES, {
-      enableTracing: true,
+      enableTracing: false,
       bindToComponentInputs: true,
     }),
     SharedUiModule,

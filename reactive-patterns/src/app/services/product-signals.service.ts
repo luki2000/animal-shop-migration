@@ -17,7 +17,7 @@ export class ProductSignalsService {
     map((queryParams) => queryParams['productId']))
   );
 
-  readonly selectedCategory = signal<string>(Category.ALL);
+  readonly selectedCategory = signal<string>(Category.GLASSES);
 
   // Http requests are async and return an observable
   // this code is simulating an http request
