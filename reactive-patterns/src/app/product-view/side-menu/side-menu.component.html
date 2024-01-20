@@ -3,8 +3,8 @@
 <!-- The queryParams directive allows us to add query params to the url -->
 <!-- The routerLinkActive directive allows us to set a style for the option that exactly matches the current activated route -->
 
-<button
-    *ngFor="let product of products()"
+@for(product of products(); track product.id) {
+  <button
     class="image-button"
     [routerLink]="['detail']"
     [queryParams]="{productId: product.id}"
@@ -16,4 +16,7 @@
       [alt]="product.title"
     />
   </button>
+
+}
+
 </div>
