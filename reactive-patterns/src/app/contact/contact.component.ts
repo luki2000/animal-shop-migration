@@ -48,6 +48,7 @@ export class ContactComponent implements OnDestroy{
     this.contactService.submitContactForm(model).pipe(
       // Since we are directly subscribing to the observable we have to unsubscribe when the component destroys
       // This is to avoid memory leaks
+      // TODO replace with takeUntilDestroyed operator, also check if there are other destryo instances in app
       takeUntil(this.destroyed$)
     ).subscribe(() => {
       this.loading = false;
